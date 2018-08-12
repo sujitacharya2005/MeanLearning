@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { style } from '../../../../node_modules/@angular/animations';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-post-create',
@@ -7,10 +6,15 @@ import { style } from '../../../../node_modules/@angular/animations';
   styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent {
-  enteredValue = '';
-  newPost = 'No Content';
-  // onAddPost(postInput: HTMLTextAreaElement) {
-    onAddPost() {
-    this.newPost = this.enteredValue;
+  enteredTitle = '';
+  enteredContent = '';
+  @Output() postCreated = new EventEmitter();
+
+  onAddPost() {
+    const post = {
+      title: this.enteredTitle,
+      content: this.enteredContent
+    };
+    this.postCreated.emit(post);
   }
 }
